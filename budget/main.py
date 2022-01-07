@@ -33,3 +33,6 @@ class ExampleClass:
         Return information about an instance created from ExampleClass.
         """
         return "I am a very smart {} object.".format(self.name)
+
+if __name__ == "__main__":
+    pass

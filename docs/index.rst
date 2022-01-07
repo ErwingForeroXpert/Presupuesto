@@ -2,11 +2,11 @@
 Welcome to Presupuesto's documentation!
 =======================================
 
-.. automodule:: src.main
+.. automodule:: budget.main
     :members:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
 
