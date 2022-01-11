@@ -6,6 +6,12 @@ name = "pypi"
 [packages]
 numpy = "*"
 vaex = "*"
+pandas = "*"
+alive-progress = "*"
+xlwings = "*"
+
+[scripts]
+test = "python -m unittest discover --pattern=test*.py"
 
 [dev-packages]
 

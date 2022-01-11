@@ -1,0 +1,26 @@
+import unittest
+import os
+from budget.utils import utils
+from test.test_fixtures import TEST_FILES_ROUTE
+
+class TestUtilsMethods(unittest.TestCase):
+
+    def setUp(self) -> None:
+        self.without_macros_book_route = os.path.join(TEST_FILES_ROUTE, 'book_without_macros.xlsm')
+        self.good_book_route = os.path.join(TEST_FILES_ROUTE, 'good_book.xlsm')
+
+    def test_run_macro_inexistent(self) -> None:
+        try:
+            utils.RunMacro(self.without_macros_book_route, "InexistentMacro")
+        except Exception as e:
+            pass
+    
+    def test_run_macro_without_params(self) -> None:
+        result = utils.RunMacro(self.good_book_route, "TestMacroWithoutParams")
+        self.assertEqual(result, None)
+    
+    def test_run_macro_with_params(self) -> None:
+        params = [1,2,3]
+        result = utils.RunMacro(self.good_book_route, "TestMacroWithParams", params)
+        self.assertEqual(result, sum(params))
+    
