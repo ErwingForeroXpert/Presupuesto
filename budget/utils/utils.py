@@ -4,8 +4,12 @@
 # 
 
 
+from ctypes import Array
 import os
+from typing import Any
 import pandas as pd
+import vaex as vx
+from vaex.execution import Executor
 import xlwings as xw
 import time 
 from . import constants as const
@@ -41,7 +45,7 @@ def isIterable(posibleList):
     except Exception as e:
         return False
 
-def RunMacro(excel_file: str, name_macro: str, _args=None):
+def RunMacro(excel_file: str, name_macro: str, _args=None) -> 'any':
     """Run Macro of excel book
 
     Args:
@@ -72,7 +76,20 @@ def RunMacro(excel_file: str, name_macro: str, _args=None):
 
     return result
 
-def getTableOfExcelSheet(file_path: str, sheet: str) -> pd.DataFrame:
+def getTableOfExcelSheet(file_path: str, sheet: str, macro: str = const.MACRO_EXTRACT_TABLE_SHEET) -> 'Any':
+    """Get Table of sheet in Excel File
+
+    Raises:
+        Exception: [description]
+
+    Returns:
+        Any: tuple
+    """
+    try:
+        _table, _columns = RunMacro(file_path, macro, [sheet])
+
+        return _table, _columns
+
+    except Exception as e:
+        raise Exception(f"getTableOfExcelSheet - {e}")
     
-    _table = RunMacro(file_path, const.MACRO_EXTRACT_TABLE_SHEET)
-    return pd.DataFrame(_table,)

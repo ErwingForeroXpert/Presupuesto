@@ -9,6 +9,7 @@ vaex = "*"
 pandas = "*"
 alive-progress = "*"
 xlwings = "*"
+faker = "*"
 
 [scripts]
 test = "python -m unittest discover --pattern=test*.py"
