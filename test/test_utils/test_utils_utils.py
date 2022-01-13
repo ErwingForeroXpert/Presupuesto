@@ -1,13 +1,15 @@
 import unittest
 import os
+import gc
 from budget.utils import utils
 from test.test_fixtures import TEST_FILES_ROUTE
 
 class TestUtilsMethods(unittest.TestCase):
 
-    def setUp(self) -> None:
-        self.without_macros_book_route = os.path.join(TEST_FILES_ROUTE, 'book_without_macros.xlsm')
-        self.good_book_route = os.path.join(TEST_FILES_ROUTE, 'good_book.xlsm')
+    @classmethod
+    def setUp(cls) -> None:
+        cls.without_macros_book_route = os.path.join(TEST_FILES_ROUTE, 'book_without_macros.xlsm')
+        cls.good_book_route = os.path.join(TEST_FILES_ROUTE, 'good_book.xlsm')
 
     def test_run_macro_inexistent(self) -> None:
         try:
@@ -24,3 +26,7 @@ class TestUtilsMethods(unittest.TestCase):
         result = utils.RunMacro(self.good_book_route, "TestMacroWithParams", params)
         self.assertEqual(result, sum(params))
     
+    @classmethod   
+    def tearDown(cls) -> None:
+        #clear data
+        gc.collect()

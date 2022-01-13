@@ -93,3 +93,4 @@ def getTableOfExcelSheet(file_path: str, sheet: str, macro: str = const.MACRO_EX
     except Exception as e:
         raise Exception(f"getTableOfExcelSheet - {e}")
     
+    
